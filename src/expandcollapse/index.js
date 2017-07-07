@@ -1,18 +1,26 @@
-const collapse = require('./collapse');
+const collapseNodes = require('./collapse');
 const expand = require('./expand');
 
-module.exports = (opts) => {
+module.exports = (cy, defaults) => {
   return {
-    collapse (eles, opts=opts) {
+    collapse (eles, opts=null) {
+      if (opts == null) {
+        opts = defaults;
+      }
 
+      collapseNodes(cy, eles, opts);
     },
 
-    expand (eles, opts=opts) {
-
+    expand (eles, opts=null) {
+      if (opts == null) {
+        opts = defaults;
+      }
+    
+      expand(cy, eles, opts);
     },
     
-    getCollapsedChildren (eles) {
-
+    getCollapsedChildren (node) {
+      return node.data('expandcollapse-collapsed-children');
     }
   };
 };

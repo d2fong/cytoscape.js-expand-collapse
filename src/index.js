@@ -16,7 +16,7 @@ let register = function( cytoscape ){
       let cy = this;
       let apiOpts = extend({}, defaults, opts);
 
-      return expandCollapseAPI(apiOpts);
+      return expandCollapseAPI(cy, apiOpts);
     } );
 };
 
