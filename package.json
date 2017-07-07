@@ -1,44 +1,46 @@
 {
   "name": "cytoscape-expand-collapse",
-  "version": "3.0.7",
-  "description": "This extension provides an interface to expand-collapse nodes.",
-  "main": "src/index.js",
-  "spm": {
-    "main": "src/index.js"
-  },
+  "version": "0.0.0",
+  "description": "Expand and collapse operations for compound nodes",
+  "main": "cytoscape-expand-collapse.js",
+  "author": "Dylan Fong",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint src",
+    "build": "cross-env NODE_ENV=production webpack",
+    "build:min": "cross-env NODE_ENV=production MIN=true webpack",
+    "watch": "webpack --progress --watch",
+    "dev": "webpack-dev-server --open",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/iVis-at-Bilkent/cytoscape.js-expand-collapse.git"
+    "url": "https://github.com/d2fong/cytoscape-expand-collapse.git"
   },
   "keywords": [
     "cytoscape",
-    "cyext"
+    "cytoscape-extension"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/iVis-at-Bilkent/cytoscape.js-expand-collapse/issues"
+    "url": "https://github.com/d2fong/cytoscape-expand-collapse/issues"
   },
-  "homepage": "https://github.com/iVis-at-Bilkent/cytoscape.js-expand-collapse",
+  "homepage": "https://github.com/d2fong/cytoscape-expand-collapse",
   "devDependencies": {
-    "browserify": "^11.2.0",
-    "gulp": "^3.9.0",
-    "gulp-derequire": "^2.1.0",
-    "gulp-jshint": "^1.11.2",
-    "gulp-prompt": "^0.1.2",
-    "gulp-replace": "^0.5.4",
-    "gulp-shell": "^0.5.0",
-    "gulp-util": "^3.0.6",
-    "jshint-stylish": "^2.0.1",
-    "node-notifier": "^4.3.1",
-    "run-sequence": "^1.1.4",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.5.1",
+    "camelcase": "^4.1.0",
+    "chai": "4.0.2",
+    "cross-env": "^5.0.0",
+    "eslint": "^3.9.1",
+    "mocha": "3.4.2",
+    "webpack": "^2.6.1",
+    "webpack-dev-server": "^2.4.5"
   },
   "peerDependencies": {
-    "cytoscape": "^2.7.0 || ^3.0.0",
-    "jquery": "^1.7.0 || ^2.0.0 || ^3.0.0"
+    "cytoscape": "^3.0.0"
+  },
+  "dependencies": {
+    "extend": "^3.0.1"
   }
 }

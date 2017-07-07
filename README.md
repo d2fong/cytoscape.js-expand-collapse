@@ -4,118 +4,13 @@ cytoscape-expand-collapse
 
 ## Description
 
-This extension provides an interface to expand/collapse nodes for better management of complexity of Cytoscape.js compound graphs, distributed under [The MIT License](https://opensource.org/licenses/MIT). When using this extension, please cite the following paper, on which the ideas are based on:
+Expand and collapse operations for compound nodes
 
-U. Dogrusoz and B. Genc, "A Multi-Graph Approach to Complexity Management in Interactive Graph Visualization", Computers & Graphics, 30(1), pp. 86-97, 2006.
-
-## API
-
-* Note that compounds are nodes.
-
-`cy.expandCollapse(options)`
-To initialize/set options whenever you want.
-
-`var api = cy.expandCollapse('get')`
-To get the extension instance after initialization.
-
-* Following functions get options parameter to apply during a particular event unlike the function above.
-
-`api.collapse(nodes, options)`
-Collapse given nodes, extend options with given param.
-
-`api.collapseRecursively(nodes, options)`
-Collapse given nodes recursively, extend options with given param.
-
-`api.collapseAll(options)`
-Collapse all nodes on graph (recursively), extend options with given param.
-
-`api.expand(nodes, options)`
-Expand given nodes, extend options with given param.
-
-`api.expandRecursively(nodes, options)`
-Expand given nodes recursively, extend options with given param.
-
-`api.expandAll(options)`
-Expand all nodes on graph (recursively), extend options with given param.
-
-`api.isExpandable(node)`
-Get whether node is expandable (or is collapsed)
-
-`api.isCollapsible(node)`
-Get whether node is collapsible.
-
-`api.expandableNodes(nodes)`
-Get expandable ones inside given nodes if nodes parameter is not specified consider all nodes
-
-`api.collapsibleNodes(nodes)`
-Get collapsible ones inside given nodes if nodes parameter is not specified consider all nodes
-
-`api.setOptions(options)`
-Resets the options to the given parameter.
-
-`api.setOption(name, value)`
-Sets the value of the option given by the name to the given value.
-
-`api.getCollapsedChildren(node)`
-Get the children of the given collapsed node which are removed during collapse operation
-
-`api.clearVisualCue()`
-Forces the visual cue to be cleared. It is to be called in extreme cases.
-
-## Events
-`cy.nodes().on("expandcollapse.beforecollapse", function(event) { var node = this; ... })` Triggered before a node is collapsed
-
-`cy.nodes().on("expandcollapse.aftercollapse", function(event) { var node = this; ... })` Triggered after a node is collapsed
-
-`cy.nodes().on("expandcollapse.beforeexpand", function(event) { var node = this; ... })` Triggered before a node is expanded
-
-`cy.nodes().on("expandcollapse.afterexpand", function(event) { var node = this; ... })`  Triggered after a node is expanded
-
-
-## Default Options
-```javascript
-    var options = {
-      layoutBy: null, // to rearrange after expand/collapse. It's just layout options or whole layout function. Choose your side!
-      // recommended usage: use cose-bilkent layout with randomize: false to preserve mental map upon expand/collapse
-      fisheye: true, // whether to perform fisheye view after expand/collapse you can specify a function too
-      animate: true, // whether to animate on drawing changes you can specify a function too
-      ready: function () { }, // callback when expand/collapse initialized
-      undoable: true, // and if undoRedoExtension exists,
-
-      cueEnabled: true, // Whether cues are enabled
-      expandCollapseCuePosition: 'top-left', // default cue position is top left you can specify a function per node too
-      expandCollapseCueSize: 12, // size of expand-collapse cue
-      expandCollapseCueLineSize: 8, // size of lines used for drawing plus-minus icons
-      expandCueImage: undefined, // image of expand icon if undefined draw regular expand cue
-      collapseCueImage: undefined, // image of collapse icon if undefined draw regular collapse cue
-      expandCollapseCueSensitivity: 1 // sensitivity of expand-collapse cues
-    };
-```
-
-## Default Undo/Redo Actions
-`ur.do("collapse", { nodes: eles, options: opts)` Equivalent of eles.collapse(opts)
-
-`ur.do("expand", { nodes: eles, options: opts)` Equivalent of eles.expand(opts)
-
-`ur.do("collapseRecursively", { nodes: eles, options: opts)` Equivalent of eles.collapseRecursively(opts)
-
-`ur.do("expandRecursively", { nodes: eles, options: opts)` Equivalent of eles.expandRecursively(opts)
-
-`ur.do("collapseAll", { options: opts)` Equivalent of cy.collapseAll(opts)
-
-`ur.do("expandAll", { options: opts })` Equivalent of cy.expandAll(opts)
-
-## Elements Style
-
- * Collapsed nodes have 'cy-expand-collapse-collapsed-node' class.
- * Meta edges have 'cy-expand-collapse-meta-edge' class.
 
 ## Dependencies
 
- * Cytoscape.js ^1.7.0
- * jQuery ^1.7.0 || ^2.0.0 || ^3.0.0
- * cytoscape-undo-redo.js(optional) ^1.0.1
- * cytoscape-cose-bilkent.js(optional/suggested for layout after expand/collapse) ^1.3.6
+ * Cytoscape.js ^3.0.0
+ * <List your dependencies here please>
 
 
 ## Usage instructions
@@ -125,18 +20,28 @@ Download the library:
  * via bower: `bower install cytoscape-expand-collapse`, or
  * via direct download in the repository (probably from a tag).
 
-`require()` the library as appropriate for your project:
+Import the library as appropriate for your project:
 
-CommonJS:
+ES import:
+
 ```js
-var cytoscape = require('cytoscape');
-var jquery = require('jquery');
-var expandCollapse = require('cytoscape-expand-collapse');
+import cytoscape from 'cytoscape';
+import expand-collapse from 'cytoscape-expand-collapse';
 
-expandCollapse( cytoscape, jquery ); // register extension
+cytoscape.use( expand-collapse );
+```
+
+CommonJS require:
+
+```js
+let cytoscape = require('cytoscape');
+let expand-collapse = require('cytoscape-expand-collapse');
+
+cytoscape.use( expand-collapse ) // register extension
 ```
 
 AMD:
+
 ```js
 require(['cytoscape', 'cytoscape-expand-collapse'], function( cytoscape, expand-collapse ){
   expand-collapse( cytoscape ); // register extension
@@ -146,15 +51,26 @@ require(['cytoscape', 'cytoscape-expand-collapse'], function( cytoscape, expand-
 Plain HTML/JS has the extension registered for you automatically, because no `require()` is needed.
 
 
+## API
+
+TODO describe the API of the extension here.
+
+
+## Build instructions
+
+* `npm run build` : Build `./src/**` into `cytoscape-expand-collapse.js`
+* `npm run watch` : Automatically build on changes with live reloading (N.b. you must already have an HTTP server running)
+* `npm run dev` : Automatically build on changes with live reloading with webpack dev server
+* `npm run lint` : Run eslint on the source
+
+N.b. all builds use babel, so modern ES features can be used in the `src`.
+
+
 ## Publishing instructions
 
 This project is set up to automatically be published to npm and bower.  To publish:
 
-1. Set the version number environment variable: `export VERSION=1.2.3`
-1. Publish: `gulp publish`
-1. If publishing to bower for the first time, you'll need to run `bower register cytoscape-expand-collapse https://github.com/iVis-at-Bilkent/cytoscape.js-expand-collapse.git`
-
-
-## Team
-
-  * [Selim Firat Yilmaz](https://github.com/mrsfy), [Metin Can Siper](https://github.com/metincansiper), [Alper Karacelik](https://github.com/alperkaracelik), [Ilkin Safarli](https://github.com/kinimesi), [Ugur Dogrusoz](https://github.com/ugurdogrusoz) of [i-Vis at Bilkent University](http://www.cs.bilkent.edu.tr/~ivis)
+1. Build the extension : `npm run build`
+1. Bump the version number and tag: `npm version major|minor|patch`
+1. Publish to npm: `npm publish .`
+1. If publishing to bower for the first time, you'll need to run `bower register cytoscape-expand-collapse https://github.com/d2fong&#x2F;cytoscape-expand-collapse.git`
