@@ -7,13 +7,13 @@ module.exports = (cy, defaults) => {
     collapse (eles, opts=null) {
       if (opts == null) { opts = defaults; }
 
-      collapseNodes(cy, eles, opts);
+      collapseNodes(eles, opts);
     },
 
     expand (eles, opts=null) {
       if (opts == null) { opts = defaults; }
     
-      expandNodes(cy, eles, opts);
+      expandNodes(eles, opts);
     },
     
     // should return a new collection if the data field doesnt exist
